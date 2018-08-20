@@ -1,3 +1,4 @@
-# Eletronica-Embarcada 2/2018
-# Caio Matheus Zardo Lopes
-# 14/0176721
+Eletronica-Embarcada 2/2018
+Aluno: Caio Matheus Zardo Lopes
+Matrícula: 14/0176721
+
