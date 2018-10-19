@@ -1,0 +1,77 @@
+#include <LiquidCrystal.h>
+
+//
+//********* Pinagem utilizada **********
+// P1.0 = pino 2 no código - TRIG do Sensor(2)
+// P1.1 = pino 3 no código - ECHO do Sensor(3)
+// P1.2 = pino 4 no código - Resistor 01    
+// P1.3 = pino 5 no código - Resistor 02  
+// P1.4 = pino 6 no código - Resistor 03
+// P1.5 = pino 7 no código - Resistor 04
+
+
+// variáveis
+int gatilho = 2; // pino TRIG do sensor ultrassônico  
+int echo = 3; // pino ECHO do sensor ultrassônico
+float tempo; // para armazenar o tempo de ida e volta do sinal em microsegundos
+float distancia_cm; // para armazenar a distância em centímetros
+
+int ledfor1 = 4;
+int ledback1 = 5;
+int ledfor2 = 6;
+int ledback2 =7 ;
+ 
+// setup (executado apenas uma vez)
+void setup() {
+ // configura pino GATILHO como saída
+ pinMode(gatilho,OUTPUT);
+ // deixa pino em LOW
+ digitalWrite(gatilho,LOW);
+ delayMicroseconds(10);
+ 
+ // configura pino ECHO como entrada
+ pinMode(echo,INPUT);
+ 
+  pinMode(ledfor1,OUTPUT);
+  pinMode(ledback1, OUTPUT);
+  pinMode(ledfor2, OUTPUT);
+  pinMode(ledback2, OUTPUT); 
+}
+ 
+ 
+// laço principal (executado indefinidamente)
+void loop() {
+ // disparar pulso ultrassônico
+ digitalWrite(gatilho, HIGH);
+ delayMicroseconds(10);
+ digitalWrite(gatilho, LOW);
+ 
+ // medir tempo de ida e volta do pulso ultrassônico
+ tempo = pulseIn(echo, HIGH);
+ 
+ // calcular a distância em centímetros
+ distancia_cm = tempo / 29.4 / 2;
+ 
+if(distancia_cm < 15){
+
+  digitalWrite(ledfor1, LOW);
+  digitalWrite(ledback2, HIGH);
+  digitalWrite(ledback1, HIGH);
+  digitalWrite(ledfor2, LOW);
+  delay(1000);
+  digitalWrite(ledfor1, HIGH);
+  digitalWrite(ledback2, HIGH);
+  digitalWrite(ledback1, LOW);
+  digitalWrite(ledfor2, LOW);
+  delay(1000);
+  }
+else{
+
+  
+  digitalWrite(ledfor1, HIGH);
+  digitalWrite(ledfor2, HIGH);
+  digitalWrite(ledback1, LOW);
+  digitalWrite(ledback2, LOW);
+  }
+ delayMicroseconds(200);
+}
